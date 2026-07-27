@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KMD WALLPAPER - Accueil</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: white; color: black; font-family: Arial, sans-serif; transition: 0.3s; }
+
+    /* ===== HEADER ===== */
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #ddd; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #2563eb; }
+    nav { display: flex; gap: 20px; }
+    nav a { display: flex; align-items: center; gap: 6px; color: black; text-decoration: none; font-weight: 500; font-size: 14px; }
+    nav a:hover, nav a.active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+.menu-btn { display: none; background: none; border: none; cursor: pointer; }
+    #theme-toggle { background: #ddd; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; }
+    #userMenu.btn { background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.user-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; }
+.user-badge a { color: #2563eb; text-decoration: none; } /* AJOUT POUR LIEN PROFIL */
+.logout-btn { background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+    i[data-lucide] { width: 18px; height: 18px; }
+
+    /* ===== HERO ===== */
+ .hero { text-align: center; padding: 60px 20px; }
+ .hero h1 { font-size: 40px; color: #2563eb; margin-bottom: 10px; }
+.hero.btn { background: #2563eb; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
+.hero.btn-premium { background: linear-gradient(135deg, #2563eb, #60a5fa); }
+
+    /* ===== DIAPORAMA ===== */
+ .slideshow { position: relative; max-width: 1000px; margin: 0 auto; overflow: hidden; border-radius: 15px; }
+ .slides { display: flex; transition: transform 0.8s ease-in-out; }
+ .slides img { width: 100%; height: 400px; object-fit: cover; }
+ .prev,.next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; z-index: 10; }
+ .next { right: 10px; }.prev { left: 10px; }
+ .dots { text-align: center; padding: 15px; }
+ .dot { display: inline-block; width: 10px; height: 10px; margin: 0 4px; background: #ccc; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+ .dot.active { background: #2563eb; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
+.footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+.footer-col h3 { margin-bottom: 15px; color: #60a5fa; display:flex; align-items:center; gap:8px; }
+.footer-col h4 { margin-bottom: 15px; color: #60a5fa; }
+.footer-col a { display: block; color: #aaa; text-decoration: none; margin-bottom: 10px; font-size: 14px; }
+.footer-col a:hover { color: white; }
+.footer-col p { color: #aaa; font-size: 14px; }
+.footer-bottom { text-align: center; border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; color: #666; font-size: 14px; }
+
+    /* ===== MODAL CONNEXION ===== */
+ .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+ .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; }
+ .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; }
+ .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+ .tab-btn { flex: 1; padding: 10px; border: none; background: #f3f3f3; border-radius: 8px; cursor: pointer; font-weight: bold; }
+ .tab-btn.active { background: #2563eb; color: white; }
+    #authForm input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; background: #f3f3f3; }
+    #authForm.btn { width: 100%; background: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+    /* ===== MODE SOMBRE ===== */
+    body.dark { background: #0a0a0a; color: white; }
+    body.dark header { background: #111; border-bottom: 1px solid #222; }
+    body.dark nav a { color: white; }
+    body.dark nav a:hover, body.dark nav a.active { color: #2563eb; }
+    body.dark #theme-toggle { background: #333; }
+    body.dark.modal-content { background: #111; }
+    body.dark #authForm input { background: #222; border-color: #333; color: white; }
+    body.dark footer { background: #000; }
+    body.dark.user-badge a { color: #60a5fa; } /* AJOUT POUR DARK MODE */
+
+    /* ===== RESPONSIVE MOBILE ===== */
+    @media (max-width: 900px) {
+      nav { position: fixed; top: 60px; right: -100%; flex-direction: column; background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px; gap: 20px; transition: 0.3s; border-left: 1px solid #ddd; box-shadow: -2px 0 10px rgba(0,0,0,0.2); }
+      nav.active { right: 0; }
+      body.dark nav { background: #111; border-left: 1px solid #222; }
+   .menu-btn { display: block; }
+   .hero h1 { font-size: 28px; }
+   .slides img { height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <i data-lucide="sparkles"></i> KMD
+    </div>
+    <nav id="navbar">
+  <a href="index.html" class="active"><i data-lucide="home"></i> Accueil</a>
+  <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
+  <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+  <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
+  <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+  <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
+  <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
+  <a href="profil.html"><i data-lucide="user"></i> Profil</a> <!-- AJOUT -->
+</nav>
+
+
+
+    <div style="display:flex; gap:10px; align-items:center;">
+      <div id="userMenu"></div> <!-- BOUTON CONNEXION AJOUTE -->
+      <button id="theme-toggle"><i data-lucide="moon"></i></button>
+      <button class="menu-btn" id="menu-btn"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <!-- TITRE -->
+  <section class="hero">
+    <h1>KMD WALLPAPER</h1>
+    <p>20 Wallpapers Gratuits. 1000+ Premium 8K à 2$/mois</p>
+   </section>
+
+  <!-- DIAPORAMA -->
+  <div class="slideshow">
+    <div class="slides">
+      <img src="https://picsum.photos/1000/500?random=10" alt="Slide 1">
+      <img src="https://picsum.photos/1000/500?random=11" alt="Slide 2">
+      <img src="https://picsum.photos/1000/500?random=12" alt="Slide 3">
+      <img src="https://picsum.photos/1000/500?random=13" alt="Slide 4">
+      <img src="https://picsum.photos/1000/500?random=14" alt="Slide 5">
+    </div>
+    <button class="prev"><i data-lucide="chevron-left"></i></button>
+    <button class="next"><i data-lucide="chevron-right"></i></button>
+  </div>
+  <div class="dots"></div>
+
+  <!-- POPUP CONNEXION -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAuth()"><i data-lucide="x"></i></span>
+      <h2 id="authTitle">Connexion</h2>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Connexion</button>
+        <button class="tab-btn" onclick="switchTab('signup')">Inscription</button>
+      </div>
+      <form id="authForm" onsubmit="handleAuth(event)">
+        <input type="email" id="email" placeholder="Ton email" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn" id="submitBtn">Se connecter</button>
+      </form>
+      <p id="authError" style="color:red; text-align:center; margin-top:10px; display:none;"></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3><i data-lucide="sparkles"></i> KMD WALLPAPER</h3>
+        <p>20 Wallpapers Gratuits. 1000+ Premium 8K à 2$/mois</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Accueil</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="premium.html">Premium</a>
+        <a href="contribuer.html">Contribuer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Légal</h4>
+        <a href="politique.html">Politique de confidentialité</a>
+        <a href="conditions.html">Conditions d'utilisation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="contact.html">Nous joindre</a>
+        <a href="mailto:kmdwallpaper@gmail.com">kmdwallpaper@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 KMD WALLPAPER. <br>par Alane KMD </p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+
+      /* ===== MENU BURGER ===== */
+      const menuBtn = document.getElementById('menu-btn');
+      const navbar = document.getElementById('navbar');
+      menuBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menuBtn.innerHTML = navbar.classList.contains('active')? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        lucide.createIcons();
+      });
+
+      /* ===== MODE SOMBRE ===== */
+      const btn = document.getElementById('theme-toggle');
+      const body = document.body;
+      if(localStorage.getItem('theme') === 'dark'){
+        body.classList.add('dark');
+        btn.innerHTML = '<i data-lucide="sun"></i>';
+      }
+      btn.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        btn.innerHTML = body.classList.contains('dark')? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+        localStorage.setItem('theme', body.classList.contains('dark')? 'dark' : 'light');
+        lucide.createIcons();
+      });
+
+      /* ===== DIAPORAMA ===== */
+      let slideIndex = 0;
+      const slides = document.querySelector('.slides');
+      const images = document.querySelectorAll('.slides img');
+      const dotsContainer = document.querySelector('.dots');
+      images.forEach((_, i) => { const dot = document.createElement('span'); dot.classList.add('dot'); dot.addEventListener('click', () => goToSlide(i)); dotsContainer.appendChild(dot); });
+      const dots = document.querySelectorAll('.dot');
+      function showSlide() { slides.style.transform = `translateX(-${slideIndex * 100}%)`; dots.forEach(d => d.classList.remove('active')); if(dots[slideIndex]) dots[slideIndex].classList.add('active'); }
+      function nextSlide() { slideIndex = (slideIndex + 1) % images.length; showSlide(); }
+      function prevSlide() { slideIndex = (slideIndex - 1 + images.length) % images.length; showSlide(); }
+      function goToSlide(n) { slideIndex = n; showSlide(); }
+      document.querySelector('.next').addEventListener('click', nextSlide);
+      document.querySelector('.prev').addEventListener('click', prevSlide);
+      setInterval(nextSlide, 3000);
+      showSlide();
+
+      /* ===== GESTION USER ===== */
+      function getUserData(){
+        let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
+        let email = localStorage.getItem('kmd_user');
+        return {email: email, data: users[email] || {premium: false}};
+      }
+
+      function updateUserMenu() {
+        const {email} = getUserData();
+        const userMenu = document.getElementById('userMenu');
+        if(email) {
+          userMenu.innerHTML = `<div class="user-badge"><a href="profil.html">${email.split('@')[0]}</a> <button onclick="logout()" class="logout-btn">Déco</button></div>`; // NOM CLIQUABLE VERS PROFIL
+        } else {
+          userMenu.innerHTML = `<button onclick="openAuth('login')" class="btn">Connexion</button>`;
+        }
+        lucide.createIcons();
+      }
+      window.logout = function() { localStorage.removeItem('kmd_user'); location.reload(); }
+      updateUserMenu();
+
+      /* ===== JS POPUP CONNEXION ===== */
+      window.openAuth = function(mode = 'login') { document.getElementById('authModal').style.display = 'block'; switchTab(mode); lucide.createIcons(); }
+      window.closeAuth = function() { document.getElementById('authModal').style.display = 'none'; document.getElementById('authError').style.display = 'none'; }
+      window.switchTab = function(mode) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        if(mode === 'login') { document.querySelectorAll('.tab-btn')[0].classList.add('active'); document.getElementById('authTitle').innerText = 'Connexion'; document.getElementById('submitBtn').innerText = 'Se connecter'; }
+        else { document.querySelectorAll('.tab-btn')[1].classList.add('active'); document.getElementById('authTitle').innerText = 'Inscription'; document.getElementById('submitBtn').innerText = "S'inscrire"; }
+        document.getElementById('authForm').dataset.mode = mode;
+      }
+      window.handleAuth = function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value; const password = document.getElementById('password').value; const mode = document.getElementById('authForm').dataset.mode; const error = document.getElementById('authError');
+        let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
+        if(mode === 'signup') {
+          if(users[email]) { error.innerText = "Cet email existe déjà"; error.style.display = 'block'; return; }
+          users[email] = { password: password, premium: false }; localStorage.setItem('kmd_users_data', JSON.stringify(users)); localStorage.setItem('kmd_user', email); alert("Compte créé avec succès!");
+        } else {
+          if(!users[email] || users[email].password!== password) { error.innerText = "Email ou mot de passe incorrect"; error.style.display = 'block'; return; }
+          localStorage.setItem('kmd_user', email);
+        }
+        closeAuth(); location.reload();
+      }
+      window.onclick = function(event) { const modal = document.getElementById('authModal'); if (event.target == modal) { closeAuth(); } }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie - KMD WALLPAPER</title>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: white; color: black; font-family: Arial, sans-serif; transition: 0.3s; }
+.container { max-width: 1200px; margin: 40px auto; padding: 20px; }
+h1 { text-align: center; margin-bottom: 10px; }
+.subtitle { text-align: center; color: #666; margin-bottom: 20px; }
+
+/* HEADER */
+header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #ddd; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #2563eb; }
+nav { display: flex; gap: 20px; }
+nav a { display: flex; align-items: center; gap: 6px; color: black; text-decoration: none; font-weight: 500; font-size: 14px; }
+nav a.active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+.menu-btn { display: none; background: none; border: none; cursor: pointer; }
+#theme-toggle { background: #ddd; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; }
+#userMenu.btn { background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.user-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; }
+.logout-btn { background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+i[data-lucide] { width: 18px; height: 18px; }
+
+/* BARRE DE RECHERCHE */
+.search-wrapper { display: flex; gap: 10px; max-width: 650px; margin: 0 auto 30px auto; }
+.search-bar { display: flex; align-items: center; gap: 10px; flex: 1; background: #f3f3f3; padding: 12px 15px; border-radius: 12px; border: 2px solid transparent; }
+.search-bar:focus-within { border-color: #2563eb; }
+.search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 16px; color: black; }
+.search-btn { background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+body.dark.search-bar { background: #111; }
+body.dark.search-bar input { color: white; }
+
+/* PREMIUM CTA */
+.premium-cta-top { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, #2563eb, #3b82f6, #60a5fa); background-size: 200% 100%; color: white; padding: 8px 16px; border-radius: 50px; font-weight: bold; text-decoration: none; font-size: 14px; animation: gradientMove 3s linear infinite; }
+@keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+/* GALERIE */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+.card { background: #f3f3f3; border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.3s; }
+.card:hover { transform: scale(1.03); }
+.card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.card-body { padding: 15px; }
+.card-tag { font-size: 12px; color: #2563eb; font-weight: bold; margin-bottom: 5px; }
+.btn { background: #2563eb; color: white; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+.btn:hover { background: #1d4ed8; }
+.load-more { display: block; margin: 40px auto; padding: 12px 30px; }
+.btn-premium-card { background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 10px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+
+/* LOCKED */
+.locked img { filter: brightness(0.4); }
+.premium-badge { position: absolute; top: 10px; right: 10px; background: linear-gradient(135deg, #FFD700, #FFA500); color: black; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 2; display: flex; align-items: center; gap: 5px; }
+.no-result { text-align: center; grid-column: 1/-1; padding: 40px; color: #666; }
+
+/* FOOTER */
+footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
+.footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+.footer-col h3 { margin-bottom: 15px; color: #60a5fa; }
+.footer-col h4 { margin-bottom: 15px; color: #60a5fa; }
+.footer-col a { display: block; color: #aaa; text-decoration: none; margin-bottom: 10px; font-size: 14px; }
+.footer-bottom { text-align: center; border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; color: #666; font-size: 14px; }
+
+/* MODAL CONNEXION */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; }
+.close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; }
+.tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.tab-btn { flex: 1; padding: 10px; border: none; background: #f3f3f3; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.tab-btn.active { background: #2563eb; color: white; }
+#authForm input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; background: #f3f3f3; }
+
+/* MODE SOMBRE */
+body.dark { background: #0a0a0a; color: white; }
+body.dark header { background: #111; border-color: #222; }
+body.dark nav a { color: white; }
+body.dark.card { background: #111; }
+body.dark.modal-content { background: #111; }
+body.dark #authForm input { background: #222; border-color: #333; color: white; }
+
+@media (max-width: 900px) {
+  nav { position: fixed; top: 60px; right: -100%; flex-direction: column; background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px; gap: 20px; transition: 0.3s; }
+  nav.active { right: 0; }
+  body.dark nav { background: #111; }
+ .menu-btn { display: block; }
+ .search-wrapper { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER UNIFORME -->
+<header>
+  <div class="logo"><i data-lucide="image"></i> KMD</div>
+  <nav id="navbar">
+    <a href="index.html"><i data-lucide="home"></i> Accueil</a>
+    <a href="galerie.html" class="active"><i data-lucide="image"></i> Galerie</a>
+    <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+    <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
+    <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+  </nav>
+  <div style="display:flex; gap:10px; align-items:center;">
+    <div id="userMenu"></div>
+    <button id="theme-toggle"><i data-lucide="moon"></i></button>
+    <button class="menu-btn" id="menu-btn"><i data-lucide="menu"></i></button>
+  </div>
+</header>
+
+<!-- CONTENU GALERIE -->
+<div class="container">
+  <h1>La Galerie KMD</h1>
+  <p class="subtitle" id="status-text">20 Images Gratuites</p>
+  <div class="search-wrapper">
+    <div class="search-bar">
+      <i data-lucide="search"></i>
+      <input type="text" id="searchInput" placeholder="Recher: Nature, City, Abstract, Anime...">
+    </div>
+    <button class="search-btn" id="searchBtn"><i data-lucide="search"></i> Rechercher</button>
+  </div>
+  <div class="gallery" id="gallery"></div>
+  <button class="btn load-more" id="loadMoreBtn"><i data-lucide="plus"></i> Charger plus</button>
+</div>
+
+<!-- POPUP CONNEXION -->
+<div id="authModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeAuth()"><i data-lucide="x"></i></span>
+    <h2 id="authTitle">Connexion</h2>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Connexion</button>
+      <button class="tab-btn" onclick="switchTab('signup')">Inscription</button>
+    </div>
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <input type="email" id="email" placeholder="Ton email" required>
+      <input type="password" id="password" placeholder="Mot de passe" required>
+      <button type="submit" class="btn" id="submitBtn">Se connecter</button>
+    </form>
+    <p id="authError" style="color:red; text-align:center; margin-top:10px; display:none;"></p>
+  </div>
+</div>
+
+<!-- FOOTER UNIFORME -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-col"><h3>KMD WALLPAPER</h3><p>20 Gratuits. 1000+ Premium 8K à 2$/mois</p></div>
+    <div class="footer-col"><h4>Navigation</h4><a href="index.html">Accueil</a><a href="galerie.html">Galerie</a><a href="premium.html">Premium</a><a href="contribuer.html">Contribuer</a></div>
+    <div class="footer-col"><h4>Légal</h4><a href="politique.html">Politique de confidentialité</a><a href="conditions.html">Conditions d'utilisation</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="contact.html">Nous joindre</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 KMD WALLPAPER. <br>Par Alane KMD </p></div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  lucide.createIcons();
+  const menuBtn = document.getElementById('menu-btn');
+  const navbar = document.getElementById('navbar');
+  menuBtn.addEventListener('click', () => { navbar.classList.toggle('active'); menuBtn.innerHTML = navbar.classList.contains('active')? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>'; lucide.createIcons(); });
+
+  const btn = document.getElementById('theme-toggle');
+  if(localStorage.getItem('theme') === 'dark'){ document.body.classList.add('dark'); btn.innerHTML = '<i data-lucide="sun"></i>'; }
+  btn.addEventListener('click', () => { document.body.classList.toggle('dark'); btn.innerHTML = document.body.classList.contains('dark')? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>'; localStorage.setItem('theme', document.body.classList.contains('dark')? 'dark' : 'light'); lucide.createIcons(); });
+
+  updateUserMenu();
+  loadGallery();
+  document.getElementById('searchBtn').addEventListener('click', filterGallery);
+  document.getElementById('searchInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') filterGallery(); });
+  document.getElementById('loadMoreBtn').addEventListener('click', renderImages);
+});
+
+/* ===== GESTION USER + ADMIN ===== */
+function isUserPremium(){
+  const email = localStorage.getItem('kmd_user');
+  if(!email) return false;
+  const usersPremium = JSON.parse(localStorage.getItem('kmd_users') || '[]'); // Admin
+  const usersData = JSON.parse(localStorage.getItem('kmd_users_data') || '{}'); // Signup
+  return usersPremium.includes(email) || (usersData[email] && usersData[email].premium === true);
+}
+
+function updateUserMenu() {
+  const email = localStorage.getItem('kmd_user');
+  const userMenu = document.getElementById('userMenu');
+  if(email) {
+    userMenu.innerHTML = `<div class="user-badge">${email.split('@')[0]} <button onclick="logout()" class="logout-btn">Déco</button></div>`;
+  } else {
+    userMenu.innerHTML = `<button onclick="openAuth('login')" class="btn">Connexion</button>`;
+  }
+  lucide.createIcons();
+}
+window.logout = function() { localStorage.removeItem('kmd_user'); location.reload(); }
+
+/* ===== GALERIE ===== */
+window.allImages = [];
+const tags = ['Nature', 'City', 'Abstract', 'Anime', 'Car', 'Gaming', 'Space', 'Dark'];
+for(let i=1; i<=1000; i++){ window.allImages.push({ id: i, tag: tags[i % tags.length] }); }
+
+let imagesLoaded = 0;
+const imagesPerLoad = 20;
+let filteredImages = [];
+
+function loadGallery(){
+  const email = localStorage.getItem('kmd_user');
+  const isPremium = isUserPremium();
+  const statusText = document.getElementById('status-text');
+
+  if(isPremium){
+    statusText.innerHTML = '👑 Tu es Premium - 1000+ Images débloquées';
+  } else if(email){
+    statusText.innerHTML = `Compte Gratuit - 20 images. <a href="premium.html" class="premium-cta-top"><i data-lucide="crown"></i><span>Passer Premium 2$/mois</span><i data-lucide="arrow-right"></i></a>`;
+  } else {
+    statusText.innerHTML = `Connecte-toi pour télécharger. <a href="premium.html" class="premium-cta-top"><i data-lucide="crown"></i><span>Voir Premium</span><i data-lucide="arrow-right"></i></a>`;
+  }
+
+  filteredImages = [...window.allImages];
+  imagesLoaded = 0;
+  document.getElementById('gallery').innerHTML = '';
+  renderImages();
+}
+
+function renderImages(){
+  const isPremium = isUserPremium();
+  const gallery = document.getElementById('gallery');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
+  let html = '';
+  const toRender = filteredImages.slice(imagesLoaded, imagesLoaded + imagesPerLoad);
+
+  if(toRender.length === 0 && imagesLoaded === 0){
+    gallery.innerHTML = '<div class="no-result"><i data-lucide="search-x"></i><p>Aucun résultat trouvé</p></div>';
+    loadMoreBtn.style.display = 'none'; lucide.createIcons(); return;
+  }
+
+  toRender.forEach(img => {
+    const i = img.id;
+    const isFree = i <= 20;
+    const canDownload = isFree || isPremium;
+
+    html += `
+      <div class="card ${canDownload? '' : 'locked'}" data-tag="${img.tag}">
+        ${!canDownload? '<span class="premium-badge"><i data-lucide="crown"></i> PREMIUM</span>' : ''}
+        <img src="https://picsum.photos/400/300?random=${i}" alt="Wallpaper ${i}" loading="lazy">
+        <div class="card-body">
+          <div class="card-tag">${img.tag}</div>
+          ${canDownload
+          ? `<button onclick="downloadImage(${i})" class="btn"><i data-lucide="download"></i> Télécharger 8K</button>`
+            : `<a href="premium.html" class="btn-premium-card"><i data-lucide="lock"></i> <span>Débloquer Premium</span></a>`
+          }
+        </div>
+      </div>
+    `;
+  });
+
+  gallery.innerHTML += html;
+  imagesLoaded += imagesPerLoad;
+  if(imagesLoaded >= filteredImages.length) loadMoreBtn.style.display = 'none';
+  else loadMoreBtn.style.display = 'block';
+  lucide.createIcons();
+}
+
+function filterGallery(){
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  filteredImages = window.allImages.filter(img => img.tag.toLowerCase().includes(query));
+  imagesLoaded = 0;
+  document.getElementById('gallery').innerHTML = '';
+  renderImages();
+}
+
+function downloadImage(id) {
+  if(!isUserPremium() && id > 20){ alert("Cette image est Premium. Passe à 2$/mois sur la page Premium"); return; }
+  const url = `https://picsum.photos/1920/1080?random=${id}`;
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `KMD-Wallpaper-${id}.jpg`;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
+/* ===== JS POPUP CONNEXION ===== */
+window.openAuth = function(mode = 'login') { document.getElementById('authModal').style.display = 'block'; switchTab(mode); lucide.createIcons(); }
+window.closeAuth = function() { document.getElementById('authModal').style.display = 'none'; document.getElementById('authError').style.display = 'none'; }
+window.switchTab = function(mode) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); if(mode === 'login') { document.querySelectorAll('.tab-btn')[0].classList.add('active'); document.getElementById('authTitle').innerText = 'Connexion'; document.getElementById('submitBtn').innerText = 'Se connecter'; } else { document.querySelectorAll('.tab-btn')[1].classList.add('active'); document.getElementById('authTitle').innerText = 'Inscription'; document.getElementById('submitBtn').innerText = "S'inscrire"; } document.getElementById('authForm').dataset.mode = mode; }
+window.handleAuth = function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const mode = document.getElementById('authForm').dataset.mode;
+  const error = document.getElementById('authError');
+  let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
+
+  if(mode === 'signup') {
+    if(users[email]) { error.innerText = "Cet email existe déjà"; error.style.display = 'block'; return; }
+    users[email] = { password: password, premium: false };
+    localStorage.setItem('kmd_users_data', JSON.stringify(users));
+    localStorage.setItem('kmd_user', email);
+    alert("Compte créé avec succès!");
+  } else {
+    if(!users[email] || users[email].password!== password) { error.innerText = "Email ou mot de passe incorrect"; error.style.display = 'block'; return; }
+    localStorage.setItem('kmd_user', email);
+  }
+  closeAuth(); location.reload();
+}
+window.onclick = function(event) { const modal = document.getElementById('authModal'); if (event.target == modal) { closeAuth(); } }
+</script>
+</body>
+</html>

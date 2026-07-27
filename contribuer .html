@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contribuer - KMD WALLPAPER</title>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: white; color: black; font-family: Arial, sans-serif; transition: 0.3s; }
+.container { max-width: 900px; margin: 40px auto; padding: 20px; text-align: center; }
+h1 { margin-bottom: 10px; }
+.subtitle { color: #666; margin-bottom: 30px; }
+
+/* HEADER + MENU DEROULANT */
+header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #ddd; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #2563eb; }
+nav { display: flex; gap: 20px; }
+nav a { display: flex; align-items: center; gap: 6px; color: black; text-decoration: none; font-weight: 500; font-size: 14px; }
+nav a.active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+
+#theme-toggle { background: #ddd; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; }
+#userMenu button { background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.user-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; }
+.user-badge a { color: #2563eb; text-decoration: none; }
+.logout-btn { background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+i[data-lucide] { width: 18px; height: 18px; }
+
+/* MENU BURGER MOBILE */
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+.menu-toggle i { width: 24px; height: 24px; }
+@media (max-width: 900px) {
+  nav { display: none; position: absolute; top: 60px; left: 0; right: 0; background: #f3f3f3; flex-direction: column; padding: 15px; border-bottom: 1px solid #ddd; }
+  nav.show { display: flex; }
+  nav a { padding: 10px 0; border-bottom: 1px solid #eee; }
+  .menu-toggle { display: block; }
+  body.dark nav { background: #111; border-color: #222; }
+}
+
+.grid-don { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.donate-box { background: #f3f3f3; padding: 25px; border-radius: 16px; text-align: left; }
+.donate-box h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.btn-donate { background: #2563eb; color: white; padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin: 6px 0; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+.btn-donate:hover { background: #1d4ed8; }
+.btn-paypal { background: #003087; }
+.btn-paypal:hover { background: #001c5a; }
+.btn-interac { background: #119a00; }
+.btn-interac:hover { background: #0d7400; }
+.card-logos { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+.card-logos img { height: 22px; }
+.interac-box { background: #ecfdf5; border: 2px dashed #119a00; padding: 15px; border-radius: 12px; margin-top: 15px; font-size: 14px; }
+
+footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
+.footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+.footer-col h3,.footer-col h4 { margin-bottom: 15px; color: #60a5fa; }
+.footer-col a { display: block; color: #aaa; text-decoration: none; margin-bottom: 10px; font-size: 14px; }
+.footer-bottom { text-align: center; border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; color: #666; font-size: 14px; }
+
+body.dark { background: #0a0a0a; color: white; }
+body.dark header { background: #111; border-color: #222; }
+body.dark nav a { color: white; }
+body.dark.donate-box { background: #111; }
+body.dark.interac-box { background: #0f1f14; border-color: #119a00; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><i data-lucide="image"></i> KMD</div>
+
+  <!-- BOUTON BURGER -->
+  <button class="menu-toggle" onclick="toggleMenu()"><i data-lucide="menu"></i></button>
+
+  <!-- MENU QUI SE DEROULE -->
+  <nav id="navbar">
+    <a href="index.html"><i data-lucide="home"></i> Accueil</a>
+    <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
+    <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+    <a href="contribuer.html" class="active"><i data-lucide="heart"></i> Contribuer</a>
+    <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+    <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
+    <a href="profil.html"><i data-lucide="user"></i> Profil</a>
+  </nav>
+
+  <div style="display:flex; gap:10px; align-items:center;">
+    <div id="userMenu"></div>
+    <button id="theme-toggle"><i data-lucide="moon"></i></button>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Soutenir KMD WALLPAPER ❤️</h1>
+  <p class="subtitle">Choisis comment tu veux contribuer</p>
+
+  <div class="grid-don">
+    <!-- CARTE -->
+    <div class="donate-box">
+      <h3><i data-lucide="credit-card"></i> Carte Bancaire</h3>
+      <p style="font-size:14px; color:#666; margin-bottom:15px;">Visa, Mastercard via Stripe</p>
+      <button class="btn-donate" onclick="donStripe(3)">Donner 3$</button>
+      <button class="btn-donate" onclick="donStripe(5)">Donner 5$</button>
+      <button class="btn-donate" onclick="donStripe(10)">Donner 10$</button>
+      <div class="card-logos">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+      </div>
+    </div>
+
+    <!-- PAYPAL -->
+    <div class="donate-box">
+      <h3><i data-lucide="wallet"></i> PayPal</h3>
+      <p style="font-size:14px; color:#666; margin-bottom:15px;">Solde PayPal ou carte liée</p>
+      <button class="btn-donate btn-paypal" onclick="donPaypal(3)"><i data-lucide="paypal"></i> Donner 3$</button>
+      <button class="btn-donate btn-paypal" onclick="donPaypal(5)"><i data-lucide="paypal"></i> Donner 5$</button>
+      <button class="btn-donate btn-paypal" onclick="donPaypal(10)"><i data-lucide="paypal"></i> Donner 10$</button>
+    </div>
+
+    <!-- INTERAC -->
+    <div class="donate-box">
+      <h3><i data-lucide="banknote"></i> Virement Interac</h3>
+      <p style="font-size:14px; color:#666; margin-bottom:15px;">0% frais. Direct Desjardins</p>
+      <div class="interac-box">
+        <p><b>Email:</b> supportkmdwallpaper@gmail.com</p>
+        <p><b>Question:</b> KMD | <b>Réponse:</b> don</p>
+      </div>
+      <button class="btn-donate btn-interac" onclick="copierInterac()"><i data-lucide="copy"></i> Copier l'email</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-col"><h3>KMD WALLPAPER</h3><p>20 Gratuits. 1000+ Premium 8K à 2$/mois</p></div>
+    <div class="footer-col"><h4>Navigation</h4><a href="index.html">Accueil</a><a href="galerie.html">Galerie</a><a href="premium.html">Premium</a><a href="contribuer.html">Contribuer</a></div>
+    <div class="footer-col"><h4>Légal</h4><a href="politique.html">Politique</a><a href="conditions.html">Conditions</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="contact.html">Nous joindre</a></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 KMD WALLPAPER. Par Alane KMD 🇨🇦</p></div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  lucide.createIcons();
+  const btn = document.getElementById('theme-toggle');
+  if(localStorage.getItem('theme') === 'dark'){ document.body.classList.add('dark'); btn.innerHTML = '<i data-lucide="sun"></i>'; }
+  btn.addEventListener('click', () => { document.body.classList.toggle('dark'); btn.innerHTML = document.body.classList.contains('dark')? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>'; localStorage.setItem('theme', document.body.classList.contains('dark')? 'dark' : 'light'); lucide.createIcons(); });
+  updateUserMenu();
+});
+
+/* MENU DEROULANT */
+function toggleMenu(){
+  document.getElementById('navbar').classList.toggle('show');
+}
+
+/* USER */
+function getUserData(){ let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}'); let email = localStorage.getItem('kmd_user'); return {email: email, data: users[email] || {premium: false}}; }
+function updateUserMenu() {
+  const {email} = getUserData();
+  const userMenu = document.getElementById('userMenu');
+  if(email) {
+    const name = document.createElement('div'); name.textContent = email.split('@')[0];
+    userMenu.innerHTML = `<div class="user-badge"><a href="profil.html"></a> <button onclick="logout()" class="logout-btn">Déco</button></div>`;
+    userMenu.querySelector('a').appendChild(name);
+  } else { userMenu.innerHTML = `<button onclick="alert('Connecte-toi depuis la Galerie')" class="btn">Connexion</button>`; }
+  lucide.createIcons();
+}
+window.logout = function() { localStorage.removeItem('kmd_user'); location.reload(); }
+
+/* PAIEMENTS */
+function donStripe(montant) {
+  const {email} = getUserData();
+  if(!email){ alert("Connecte-toi d'abord"); return; }
+  const liensStripe = { 3: "https://buy.stripe.com/test_3", 5: "https://buy.stripe.com/test_5", 10: "https://buy.stripe.com/test_10" }
+  if(liensStripe[montant].includes("test_")){ alert(`Configure Stripe d'abord. Utilise PayPal/Interac en attendant.`); return; }
+  window.location.href = liensStripe[montant];
+}
+function donPaypal(montant) {
+  const tonPaypal = "https://paypal.me/AlaneKMD"; // CHANGE ICI
+  window.open(`${tonPaypal}/${montant}CAD`, '_blank');
+}
+function copierInterac(){
+  navigator.clipboard.writeText("supportkmdwallpaper@gmail.com"); // CHANGE ICI
+  alert("Email copié!");
+}
+</script>
+</body>
+</html>

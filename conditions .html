@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conditions d'Utilisation - KMD WALLPAPER</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: white; color: black; font-family: Arial, sans-serif; transition: 0.3s; line-height: 1.8; }
+
+    /* HEADER */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0;
+      z-index: 1000; border-bottom: 1px solid #ddd;
+    }
+   .logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #2563eb; }
+    nav { display: flex; gap: 20px; }
+    nav a { display: flex; align-items: center; gap: 6px; color: black; text-decoration: none; font-weight: 500; font-size: 14px; }
+    nav a.active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+   .menu-btn { display: none; background: none; border: none; cursor: pointer; }
+    #theme-toggle { background: #ddd; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; }
+    #userMenu.btn { background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+   .user-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; }
+   .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+    i[data-lucide] { width: 18px; height: 18px; }
+
+    /* CONTENU */
+    section { max-width: 900px; margin: 60px auto; padding: 20px; }
+    h1 { margin-bottom: 10px; color: #2563eb; }
+    h3 { margin-top: 30px; margin-bottom: 10px; color: #2563eb; }
+    ul { margin-left: 20px; }
+    hr { margin: 40px 0; border: none; border-top: 1px solid #ddd; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* FOOTER BANDE NOIRE COMPLET */
+    footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
+   .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+   .footer-col h3 { margin-bottom: 15px; color: #60a5fa; }
+   .footer-col h4 { margin-bottom: 15px; color: #60a5fa; }
+   .footer-col a { display: block; color: #aaa; text-decoration: none; margin-bottom: 10px; font-size: 14px; }
+   .footer-col a:hover { color: white; }
+   .footer-bottom { text-align: center; border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; color: #666; font-size: 14px; }
+
+    /* MODAL CONNEXION */
+   .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+   .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; }
+   .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; }
+   .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+   .tab-btn { flex: 1; padding: 10px; border: none; background: #f3f3f3; border-radius: 8px; cursor: pointer; font-weight: bold; }
+   .tab-btn.active { background: #2563eb; color: white; }
+    #authForm input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; background: #f3f3f3; }
+
+    /* MODE SOMBRE */
+    body.dark { background: #0a0a0a; color: #eee; }
+    body.dark header { background: #222; border-color: #333; }
+    body.dark nav a { color: #eee; }
+    body.dark h1, body.dark h3 { color: #60a5fa; }
+    body.dark a { color: #60a5fa; }
+    body.dark hr { border-color: #333; }
+    body.dark footer { background: #000; }
+    body.dark.modal-content { background: #111; }
+    body.dark #authForm input { background: #222; border-color: #333; color: white; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav {
+        position: fixed; top: 60px; right: -100%; flex-direction: column;
+        background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px;
+        gap: 20px; transition: 0.3s; border-left: 1px solid #ddd;
+      }
+      nav.active { right: 0; }
+      body.dark nav { background: #111; }
+     .menu-btn { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><i data-lucide="image"></i> KMD</div>
+    <nav id="navbar">
+  <a href="index.html"><i data-lucide="home"></i> Accueil</a>
+  <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
+  <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+  <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
+  <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+  <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
+  <a href="profil.html"><i data-lucide="user"></i> Profil</a> <!-- AJOUT -->
+      <a href="conditions.html" class="active"><i data-lucide="file-text"></i> Conditions</a>
+    </nav>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <div id="userMenu"></div> <!-- BOUTON CONNEXION AJOUTE -->
+      <button id="theme-toggle"><i data-lucide="moon"></i></button>
+      <button class="menu-btn" id="menu-btn"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <section>
+    <!-- FRANÇAIS -->
+    <h1><i data-lucide="file-text"></i> Conditions d'Utilisation</h1>
+    <p><strong>Dernière mise à jour :</strong> 27 Juillet 2026</p>
+    <p>En utilisant KMD WALLPAPER, vous acceptez ces conditions.</p>
+
+    <h3>1. Utilisation des Wallpapers</h3>
+    <p>Les 20 wallpapers gratuits sont pour usage personnel uniquement. Interdit de les revendre, redistribuer ou les utiliser à des fins commerciales sans autorisation écrite.</p>
+    <p>Les wallpapers Premium 8K vous donnent une licence personnelle illimitée pour usage perso et pro.</p>
+
+    <h3>2. Abonnement Premium</h3>
+    <p>L'abonnement à 2$/mois est renouvelé automatiquement. Vous pouvez l'annuler à tout moment depuis votre profil. L'accès aux téléchargements 8K est désactivé après annulation.</p>
+
+    <h3>3. Compte Utilisateur</h3>
+    <p>Vous êtes responsable de la confidentialité de votre mot de passe. KMD WALLPAPER n'est pas responsable en cas de partage de compte.</p>
+
+    <h3>4. Propriété Intellectuelle</h3>
+    <p>Tout le contenu de KMD WALLPAPER appartient à KMD. Le logo, le nom et le design sont protégés.</p>
+
+    <h3>5. Contributions</h3>
+    <p>En envoyant un wallpaper via "Contribuer", vous accordez à KMD WALLPAPER une licence d'utilisation. Vous devez être l'auteur de l'image.</p>
+
+    <h3>6. Limitation de Responsabilité</h3>
+    <p>KMD WALLPAPER n'est pas responsable des dommages liés à l'utilisation du site. Le service est fourni "tel quel".</p>
+
+    <h3>7. Contact</h3>
+    <p>Pour toute question légale : <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></p>
+
+    <hr>
+
+    <!-- ANGLAIS -->
+    <h1>Terms of Service</h1>
+    <p><strong>Last updated:</strong> July 27, 2026</p>
+    <p>By using KMD WALLPAPER, you agree to these terms.</p>
+
+    <h3>1. Use of Wallpapers</h3>
+    <p>20 free wallpapers are for personal use only. You may not resell, redistribute, or use them for commercial purposes without written permission.</p>
+    <p>Premium 8K wallpapers grant you an unlimited personal license for personal and commercial use.</p>
+
+    <h3>2. Premium Subscription</h3>
+    <p>The $2/month subscription auto-renews. You can cancel anytime from your profile. 8K download access is disabled after cancellation.</p>
+
+    <h3>3. User Account</h3>
+    <p>You are responsible for your password. KMD WALLPAPER is not responsible for account sharing.</p>
+
+    <h3>4. Intellectual Property</h3>
+    <p>All content on KMD WALLPAPER is owned by KMD. The logo, name, and design are protected.</p>
+
+    <h3>5. Contributions</h3>
+    <p>By submitting a wallpaper via "Contribuer", you grant KMD WALLPAPER a usage license. You must be the author of the image.</p>
+
+    <h3>6. Limitation of Liability</h3>
+    <p>KMD WALLPAPER is not liable for any damages from using the site. The service is provided "as is".</p>
+
+    <h3>7. Contact</h3>
+    <p>For any legal questions: <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></p>
+  </section>
+
+  <!-- POPUP CONNEXION -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeAuth()"><i data-lucide="x"></i></span>
+      <h2 id="authTitle">Connexion</h2>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('login')">Connexion</button>
+        <button class="tab-btn" onclick="switchTab('signup')">Inscription</button>
+      </div>
+      <form id="authForm" onsubmit="handleAuth(event)">
+        <input type="email" id="email" placeholder="Ton email" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button type="submit" id="submitBtn" style="width:100%; background:#2563eb; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">Se connecter</button>
+      </form>
+      <p id="authError" style="color:red; text-align:center; margin-top:10px; display:none;"></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col"><h3>KMD WALLPAPER</h3><p>20 Gratuits. 1000+ Premium 8K à 2$/mois</p></div>
+      <div class="footer-col"><h4>Navigation</h4><a href="index.html">Accueil</a><a href="galerie.html">Galerie</a><a href="premium.html">Premium</a><a href="contribuer.html">Contribuer</a></div>
+      <div class="footer-col"><h4>Légal</h4><a href="politique.html">Politique de confidentialité</a><a href="conditions.html">Conditions d'utilisation</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="contact.html">Nous joindre</a><a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 KMD WALLPAPER. Tous droits réservés. <br>Par Alane KMD </p></div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+
+      /* MENU BURGER */
+      const menuBtn = document.getElementById('menu-btn');
+      const navbar = document.getElementById('navbar');
+      menuBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menuBtn.innerHTML = navbar.classList.contains('active')? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        lucide.createIcons();
+      });
+
+      /* MODE SOMBRE / CLAIR */
+      const btn = document.getElementById('theme-toggle');
+      if(localStorage.getItem('theme') === 'dark'){
+        document.body.classList.add('dark');
+        btn.innerHTML = '<i data-lucide="sun"></i>';
+      }
+      btn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        if(document.body.classList.contains('dark')){
+          btn.innerHTML = '<i data-lucide="sun"></i>';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          btn.innerHTML = '<i data-lucide="moon"></i>';
+          localStorage.setItem('theme', 'light');
+        }
+        lucide.createIcons();
+      });
+
+      /* ===== GESTION USER ===== */
+      function getUserData(){
+        let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
+        let email = localStorage.getItem('kmd_user');
+        return {email: email, data: users[email] || {premium: false}};
+      }
+
+      function updateUserMenu() {
+        const {email} = getUserData();
+        const userMenu = document.getElementById('userMenu');
+        if(email) {
+          userMenu.innerHTML = `<div class="user-badge">${email.split('@')[0]} <button onclick="logout()" class="logout-btn">Déco</button></div>`;
+        } else {
+          userMenu.innerHTML = `<button onclick="openAuth('login')" class="btn">Connexion</button>`;
+        }
+        lucide.createIcons();
+      }
+      window.logout = function() { localStorage.removeItem('kmd_user'); location.reload(); }
+      updateUserMenu();
+
+      /* ===== JS POPUP CONNEXION ===== */
+      window.openAuth = function(mode = 'login') { document.getElementById('authModal').style.display = 'block'; switchTab(mode); lucide.createIcons(); }
+      window.closeAuth = function() { document.getElementById('authModal').style.display = 'none'; document.getElementById('authError').style.display = 'none'; }
+      window.switchTab = function(mode) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        if(mode === 'login') { document.querySelectorAll('.tab-btn')[0].classList.add('active'); document.getElementById('authTitle').innerText = 'Connexion'; document.getElementById('submitBtn').innerText = 'Se connecter'; }
+        else { document.querySelectorAll('.tab-btn')[1].classList.add('active'); document.getElementById('authTitle').innerText = 'Inscription'; document.getElementById('submitBtn').innerText = "S'inscrire"; }
+        document.getElementById('authForm').dataset.mode = mode;
+      }
+      window.handleAuth = function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value; const password = document.getElementById('password').value; const mode = document.getElementById('authForm').dataset.mode; const error = document.getElementById('authError');
+        let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
+        if(mode === 'signup') {
+          if(users[email]) { error.innerText = "Cet email existe déjà"; error.style.display = 'block'; return; }
+          users[email] = { password: password, premium: false }; localStorage.setItem('kmd_users_data', JSON.stringify(users)); localStorage.setItem('kmd_user', email); alert("Compte créé avec succès!");
+        } else {
+          if(!users[email] || users[email].password!== password) { error.innerText = "Email ou mot de passe incorrect"; error.style.display = 'block'; return; }
+          localStorage.setItem('kmd_user', email);
+        }
+        closeAuth(); location.reload();
+      }
+      window.onclick = function(event) { const modal = document.getElementById('authModal'); if (event.target == modal) { closeAuth(); } }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Profil - KMD WALLPAPER</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: white; color: black; font-family: Arial, sans-serif; transition: 0.3s; }
+
+    /* HEADER */
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #ddd; }
+   .logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #2563eb; }
+    nav { display: flex; gap: 20px; }
+    nav a { display: flex; align-items: center; gap: 6px; color: black; text-decoration: none; font-weight: 500; font-size: 14px; }
+    nav a.active { color: #2563eb; border-bottom: 2px solid #2563eb; }
+   .menu-btn { display: none; background: none; border: none; cursor: pointer; }
+    #theme-toggle { background: #ddd; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; }
+    #userMenu.btn { background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+   .user-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; }
+   .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+    i[data-lucide] { width: 18px; height: 18px; }
+
+    /* CONTENU PROFIL */
+   .profile-container { max-width: 700px; margin: 60px auto; padding: 20px; }
+   .profile-card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; }
+   .profile-avatar { width: 100px; height: 100px; border-radius: 50%; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; margin: 0 auto 20px; }
+   .profile-card h1 { margin-bottom: 10px; }
+   .profile-info { text-align: left; margin: 30px 0; }
+   .info-row { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #eee; }
+   .badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+   .badge-free { background: #f3f3f3; color: #333; }
+   .badge-premium { background: #fef3c7; color: #d97706; }
+   .btn-upgrade { background: #2563eb; color: white; border: none; padding: 14px 30px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+   .btn-logout { background: #ef4444; color: white; border: none; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+
+    /* FOOTER */
+    footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
+   .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
+   .footer-col h3 { margin-bottom: 15px; color: #60a5fa; }
+   .footer-col h4 { margin-bottom: 15px; color: #60a5fa; }
+   .footer-col a { display: block; color: #aaa; text-decoration: none; margin-bottom: 10px; font-size: 14px; }
+   .footer-bottom { text-align: center; border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; color: #666; font-size: 14px; }
+
+    /* MODE SOMBRE */
+    body.dark { background: #0a0a0a; color: #eee; }
+    body.dark header { background: #222; border-color: #333; }
+    body.dark nav a { color: #eee; }
+    body.dark .profile-card { background: #111; }
+    body.dark .info-row { border-color: #333; }
+    body.dark footer { background: #000; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { position: fixed; top: 60px; right: -100%; flex-direction: column; background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px; gap: 20px; transition: 0.3s; }
+      nav.active { right: 0; }
+      body.dark nav { background: #111; }
+     .menu-btn { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><i data-lucide="image"></i> KMD</div>
+    <nav id="navbar">
+   
+  <a href="index.html"><i data-lucide="home"></i> Accueil</a>
+  <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
+  <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+  <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
+  <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+  <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
+      <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
+  <a href="profil.html" class="active"><i data-lucide="user"></i> Profil</a> 
+      <p class="forgot-link"><a href="recuperation.html">Mot de passe oublié?</a></p><!-- AJOUT -->
+</nav>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <div id="userMenu"></div>
+      <button id="theme-toggle"><i data-lucide="moon"></i></button>
+      <button class="menu-btn" id="menu-btn"><i data-lucide="menu"></i></button>
+    </div>
+  </header>
+
+  <div class="profile-container">
+    <div class="profile-card" id="profileCard">
+      <!-- Le JS va remplir ça -->
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col"><h3>KMD WALLPAPER</h3><p>20 Gratuits. 1000+ Premium 8K à 2$/mois</p></div>
+      <div class="footer-col"><h4>Navigation</h4><a href="index.html">Accueil</a><a href="galerie.html">Galerie</a><a href="premium.html">Premium</a><a href="contribuer.html">Contribuer</a></div>
+      <div class="footer-col"><h4>Légal</h4><a href="politique.html">Politique de confidentialité</a><a href="conditions.html">Conditions d'utilisation</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="contact.html">Nous joindre</a><a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 KMD WALLPAPER. Tous droits réservés. <br>Par Alane KMD </p></div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      lucide.createIcons();
+
+      /* MENU + THEME */
+      const menuBtn = document.getElementById('menu-btn');
+      const navbar = document.getElementById('navbar');
+      menuBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menuBtn.innerHTML = navbar.classList.contains('active')? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+        lucide.createIcons();
+      });
+      const btn = document.getElementById('theme-toggle');
+      if(localStorage.getItem('theme') === 'dark'){ document.body.classList.add('dark'); btn.innerHTML = '<i data-lucide="sun"></i>'; }
+      btn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        btn.innerHTML = document.body.classList.contains('dark')? '<i data-lucide="sun"></i>' : '<i data-lucide="moon"></i>';
+        localStorage.setItem('theme', document.body.classList.contains('dark')? 'dark' : 'light'); lucide.createIcons();
+      });
+
+      /* ===== GESTION PROFIL ===== */
+      function getUserData(){
+        let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
+        let email = localStorage.getItem('kmd_user');
+        return {email: email, data: users[email] || {premium: false}};
+      }
+
+      function loadProfile() {
+        const {email, data} = getUserData();
+        const card = document.getElementById('profileCard');
+        
+        if(!email) {
+          card.innerHTML = `<h1>Vous n'êtes pas connecté</h1><p>Connectez-vous pour voir votre profil.</p><button onclick="window.location='index.html'" class="btn-upgrade">Aller à l'accueil</button>`;
+          return;
+        }
+
+        const username = email.split('@')[0];
+        const initial = username[0].toUpperCase();
+        const status = data.premium ? 'Premium' : 'Gratuit';
+        const badgeClass = data.premium ? 'badge-premium' : 'badge-free';
+
+        card.innerHTML = `
+          <div class="profile-avatar">${initial}</div>
+          <h1>Bonjour, ${username}</h1>
+          <p>Bienvenue sur votre profil KMD WALLPAPER</p>
+          
+          <div class="profile-info">
+            <div class="info-row">
+              <span><i data-lucide="mail"></i> Email</span>
+              <span>${email}</span>
+            </div>
+            <div class="info-row">
+              <span><i data-lucide="crown"></i> Abonnement</span>
+              <span class="badge ${badgeClass}">${status}</span>
+            </div>
+          </div>
+
+          ${!data.premium ? `<button onclick="window.location='premium.html'" class="btn-upgrade">Passer à Premium 2$/mois</button>` : `<p style="color: #10b981; font-weight:bold;">✅ Vous avez accès à tous les wallpapers 8K</p>`}
+          
+          <button onclick="logout()" class="btn-logout">Se déconnecter</button>
+        `;
+        lucide.createIcons();
+      }
+
+      function updateUserMenu() {
+        const {email} = getUserData();
+        const userMenu = document.getElementById('userMenu');
+        if(email) {
+          userMenu.innerHTML = `<a href="profil.html" class="user-badge">${email.split('@')[0]}</a>`;
+        } else {
+          userMenu.innerHTML = `<button onclick="alert('Connectez-vous depuis l\\'accueil')" class="btn">Connexion</button>`;
+        }
+      }
+      
+      window.logout = function() { localStorage.removeItem('kmd_user'); window.location = 'index.html'; }
+      
+      loadProfile();
+      updateUserMenu();
+    });
+  </script>
+</body>
+</html>
