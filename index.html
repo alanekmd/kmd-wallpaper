@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KMD WALLPAPER - Accueil</title>
-<!-- FAVICON KMD -->
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,25 +19,25 @@
     #theme-toggle { background: #ddd; border: none; padding: 8px; border-radius: 50%; cursor: pointer; display: flex; }
     #userMenu.btn { background: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: bold; }
 .user-badge { display: flex; align-items: center; gap: 8px; font-weight: bold; }
-.user-badge a { color: #2563eb; text-decoration: none; } /* AJOUT POUR LIEN PROFIL */
+.user-badge a { color: #2563eb; text-decoration: none; }
 .logout-btn { background: #ef4444; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
     i[data-lucide] { width: 18px; height: 18px; }
 
     /* ===== HERO ===== */
- .hero { text-align: center; padding: 60px 20px; }
- .hero h1 { font-size: 40px; color: #2563eb; margin-bottom: 10px; }
+.hero { text-align: center; padding: 60px 20px; }
+.hero h1 { font-size: 40px; color: #2563eb; margin-bottom: 10px; }
 .hero.btn { background: #2563eb; color: white; padding: 12px 24px; border-radius: 10px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
 .hero.btn-premium { background: linear-gradient(135deg, #2563eb, #60a5fa); }
 
     /* ===== DIAPORAMA ===== */
- .slideshow { position: relative; max-width: 1000px; margin: 0 auto; overflow: hidden; border-radius: 15px; }
- .slides { display: flex; transition: transform 0.8s ease-in-out; }
- .slides img { width: 100%; height: 400px; object-fit: cover; }
- .prev,.next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; z-index: 10; }
- .next { right: 10px; }.prev { left: 10px; }
- .dots { text-align: center; padding: 15px; }
- .dot { display: inline-block; width: 10px; height: 10px; margin: 0 4px; background: #ccc; border-radius: 50%; cursor: pointer; transition: 0.3s; }
- .dot.active { background: #2563eb; }
+.slideshow { position: relative; max-width: 1000px; margin: 0 auto; overflow: hidden; border-radius: 15px; }
+.slides { display: flex; transition: transform 0.8s ease-in-out; }
+.slides img { width: 100%; height: 400px; object-fit: cover; }
+.prev,.next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; z-index: 10; }
+.next { right: 10px; }.prev { left: 10px; }
+.dots { text-align: center; padding: 15px; }
+.dot { display: inline-block; width: 10px; height: 10px; margin: 0 4px; background: #ccc; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.dot.active { background: #2563eb; }
 
     /* ===== FOOTER ===== */
     footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
@@ -51,14 +50,21 @@
 .footer-bottom { text-align: center; border-top: 1px solid #222; margin-top: 30px; padding-top: 20px; color: #666; font-size: 14px; }
 
     /* ===== MODAL CONNEXION ===== */
- .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
- .modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; }
- .close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; }
- .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
- .tab-btn { flex: 1; padding: 10px; border: none; background: #f3f3f3; border-radius: 8px; cursor: pointer; font-weight: bold; }
- .tab-btn.active { background: #2563eb; color: white; }
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+.modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 400px; position: relative; }
+.close-btn { position: absolute; top: 15px; right: 20px; cursor: pointer; }
+.tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.tab-btn { flex: 1; padding: 10px; border: none; background: #f3f3f3; border-radius: 8px; cursor: pointer; font-weight: bold; }
+.tab-btn.active { background: #2563eb; color: white; }
     #authForm input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; background: #f3f3f3; }
     #authForm.btn { width: 100%; background: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+    /* ===== BANNIERE COOKIES LOI 25 ===== */
+    #cookie-banner { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #111; color: white; padding: 15px 20px; z-index: 3000; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); }
+    #cookie-banner p { flex: 1; font-size: 14px; line-height: 1.5; }
+    #cookie-banner button { background: #2563eb; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    #cookie-banner button.reject { background: #555; }
+    #cookie-banner a { color: #60a5fa; text-decoration: underline; }
 
     /* ===== MODE SOMBRE ===== */
     body.dark { background: #0a0a0a; color: white; }
@@ -69,16 +75,18 @@
     body.dark.modal-content { background: #111; }
     body.dark #authForm input { background: #222; border-color: #333; color: white; }
     body.dark footer { background: #000; }
-    body.dark.user-badge a { color: #60a5fa; } /* AJOUT POUR DARK MODE */
+    body.dark.user-badge a { color: #60a5fa; }
+    body.dark #cookie-banner { background: #000; }
 
     /* ===== RESPONSIVE MOBILE ===== */
     @media (max-width: 900px) {
       nav { position: fixed; top: 60px; right: -100%; flex-direction: column; background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px; gap: 20px; transition: 0.3s; border-left: 1px solid #ddd; box-shadow: -2px 0 10px rgba(0,0,0,0.2); }
       nav.active { right: 0; }
       body.dark nav { background: #111; border-left: 1px solid #222; }
-   .menu-btn { display: block; }
-   .hero h1 { font-size: 28px; }
-   .slides img { height: 250px; }
+  .menu-btn { display: block; }
+  .hero h1 { font-size: 28px; }
+  .slides img { height: 250px; }
+   #cookie-banner { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -90,21 +98,19 @@
       <i data-lucide="sparkles"></i> KMD
     </div>
     <nav id="navbar">
-  <a href="index.html" class="active"><i data-lucide="home"></i> Accueil</a>
-  <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
-  <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
-  <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
-  <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
-  <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
-  <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
-  <a href="profil.html"><i data-lucide="user"></i> Profil</a>
-  <a href="recuperation.html">Mot de passe oublié ?</a><!-- AJOUT -->
-</nav>
-
-
+      <a href="index.html" class="active"><i data-lucide="home"></i> Accueil</a>
+      <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
+      <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+      <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
+      <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+      <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
+      <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
+      <a href="profil.html"><i data-lucide="user"></i> Profil</a>
+      <a href="recuperation.html">Mot de passe oublié?</a>
+    </nav>
 
     <div style="display:flex; gap:10px; align-items:center;">
-      <div id="userMenu"></div> <!-- BOUTON CONNEXION AJOUTE -->
+      <div id="userMenu"></div>
       <button id="theme-toggle"><i data-lucide="moon"></i></button>
       <button class="menu-btn" id="menu-btn"><i data-lucide="menu"></i></button>
     </div>
@@ -114,7 +120,7 @@
   <section class="hero">
     <h1>KMD WALLPAPER</h1>
     <p>20 Wallpapers Gratuits. 1000+ Premium 8K à 2$/mois</p>
-   </section>
+  </section>
 
   <!-- DIAPORAMA -->
   <div class="slideshow">
@@ -145,6 +151,15 @@
         <button type="submit" class="btn" id="submitBtn">Se connecter</button>
       </form>
       <p id="authError" style="color:red; text-align:center; margin-top:10px; display:none;"></p>
+    </div>
+  </div>
+
+  <!-- BANNIERE COOKIES -->
+  <div id="cookie-banner">
+    <p>🍪 Nous utilisons des cookies pour le mode sombre et l’analyse anonyme du site. En cliquant "Accepter", vous consentez à l’utilisation des cookies conformément à notre <a href="politique.html">Politique de confidentialité</a>.</p>
+    <div style="display:flex; gap:10px;">
+      <button onclick="acceptCookies()">Accepter</button>
+      <button class="reject" onclick="rejectCookies()">Refuser</button>
     </div>
   </div>
 
@@ -206,6 +221,24 @@
         lucide.createIcons();
       });
 
+      /* ===== BANNIERE COOKIES LOI 25 ===== */
+      function showCookieBanner() {
+        if(!localStorage.getItem('kmd_cookie_consent')) {
+          document.getElementById('cookie-banner').style.display = 'flex';
+        }
+      }
+      window.acceptCookies = function() {
+        localStorage.setItem('kmd_cookie_consent', 'accepted');
+        document.getElementById('cookie-banner').style.display = 'none';
+        // Ici tu pourras activer Google Analytics
+      }
+      window.rejectCookies = function() {
+        localStorage.setItem('kmd_cookie_consent', 'rejected');
+        document.getElementById('cookie-banner').style.display = 'none';
+        // Ici tu pourras bloquer Google Analytics
+      }
+      showCookieBanner();
+
       /* ===== DIAPORAMA ===== */
       let slideIndex = 0;
       const slides = document.querySelector('.slides');
@@ -228,12 +261,11 @@
         let email = localStorage.getItem('kmd_user');
         return {email: email, data: users[email] || {premium: false}};
       }
-
       function updateUserMenu() {
         const {email} = getUserData();
         const userMenu = document.getElementById('userMenu');
         if(email) {
-          userMenu.innerHTML = `<div class="user-badge"><a href="profil.html">${email.split('@')[0]}</a> <button onclick="logout()" class="logout-btn">Déco</button></div>`; // NOM CLIQUABLE VERS PROFIL
+          userMenu.innerHTML = `<div class="user-badge"><a href="profil.html">${email.split('@')[0]}</a> <button onclick="logout()" class="logout-btn">Déco</button></div>`;
         } else {
           userMenu.innerHTML = `<button onclick="openAuth('login')" class="btn">Connexion</button>`;
         }
