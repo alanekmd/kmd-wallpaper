@@ -86,8 +86,8 @@ body.dark #authForm input { background: #222; border-color: #333; color: white; 
   nav { position: fixed; top: 60px; right: -100%; flex-direction: column; background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px; gap: 20px; transition: 0.3s; }
   nav.active { right: 0; }
   body.dark nav { background: #111; }
- .menu-btn { display: block; }
- .search-wrapper { flex-direction: column; }
+.menu-btn { display: block; }
+.search-wrapper { flex-direction: column; }
 }
 </style>
 </head>
@@ -105,8 +105,8 @@ body.dark #authForm input { background: #222; border-color: #333; color: white; 
     <a href="politique.html"><i data-lucide="shield"></i> Politique</a>
   <a href="profil.html"><i data-lucide="user"></i> Profil</a> <!-- AJOUT -->
       <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
-    <a href="recuperation.html">Mot de passe oublié ?</a>
- 
+    <a href="recuperation.html">Mot de passe oublié?</a>
+
   </nav>
   <div style="display:flex; gap:10px; align-items:center;">
     <div id="userMenu"></div>
@@ -250,7 +250,7 @@ function renderImages(){
         <div class="card-body">
           <div class="card-tag">${img.tag}</div>
           ${canDownload
-          ? `<button onclick="downloadImage(${i})" class="btn"><i data-lucide="download"></i> Télécharger 8K</button>`
+         ? `<button onclick="downloadImage(${i})" class="btn"><i data-lucide="download"></i> Télécharger 8K</button>`
             : `<a href="premium.html" class="btn-premium-card"><i data-lucide="lock"></i> <span>Débloquer Premium</span></a>`
           }
         </div>
@@ -275,11 +275,13 @@ function filterGallery(){
 
 function downloadImage(id) {
   if(!isUserPremium() && id > 20){ alert("Cette image est Premium. Passe à 2$/mois sur la page Premium"); return; }
+
   const url = `https://picsum.photos/1920/1080?random=${id}`;
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `KMD-Wallpaper-${id}.jpg`;
-  document.body.appendChild(a); a.click(); a.remove();
+  
+  // On ouvre l'image 8K dans un nouvel onglet
+  window.open(url, '_blank');
+  
+  alert("Image 8K ouverte. Fais clic droit > Enregistrer l'image sous");
 }
 
 /* ===== JS POPUP CONNEXION ===== */
