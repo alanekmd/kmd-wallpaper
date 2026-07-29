@@ -4,19 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Politique de Confidentialité - KMD WALLPAPER</title>
-  <!-- FAVICON KMD -->
-<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: white; color: black; font-family: Arial, sans-serif; transition: 0.3s; line-height: 1.8; }
 
     /* HEADER */
-    header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0;
-      z-index: 1000; border-bottom: 1px solid #ddd;
-    }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #f3f3f3; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #ddd; }
    .logo { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: #2563eb; }
     nav { display: flex; gap: 20px; }
     nav a { display: flex; align-items: center; gap: 6px; color: black; text-decoration: none; font-weight: 500; font-size: 14px; }
@@ -37,7 +32,7 @@
     a { color: #2563eb; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* FOOTER BANDE NOIRE COMPLET */
+    /* FOOTER */
     footer { background: #111; color: white; padding: 40px 20px 20px; margin-top: 60px; }
    .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: auto; }
    .footer-col h3 { margin-bottom: 15px; color: #60a5fa; }
@@ -55,6 +50,12 @@
    .tab-btn.active { background: #2563eb; color: white; }
     #authForm input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; background: #f3f3f3; }
 
+    /* BANNIERE COOKIES LOI 25 */
+    #cookie-banner { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #111; color: white; padding: 15px 20px; z-index: 3000; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+    #cookie-banner p { flex: 1; font-size: 14px; }
+    #cookie-banner button { background: #2563eb; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    #cookie-banner button.reject { background: #555; }
+
     /* MODE SOMBRE */
     body.dark { background: #0a0a0a; color: #eee; }
     body.dark header { background: #222; border-color: #333; }
@@ -66,14 +67,11 @@
     body.dark footer { background: #000; }
     body.dark.modal-content { background: #111; }
     body.dark #authForm input { background: #222; border-color: #333; color: white; }
+    body.dark #cookie-banner { background: #000; }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      nav {
-        position: fixed; top: 60px; right: -100%; flex-direction: column;
-        background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px;
-        gap: 20px; transition: 0.3s; border-left: 1px solid #ddd;
-      }
+      nav { position: fixed; top: 60px; right: -100%; flex-direction: column; background: #f3f3f3; width: 70%; height: 100vh; padding: 30px 20px; gap: 20px; transition: 0.3s; border-left: 1px solid #ddd; }
       nav.active { right: 0; }
       body.dark nav { background: #111; }
      .menu-btn { display: block; }
@@ -84,75 +82,103 @@
   <header>
     <div class="logo"><i data-lucide="image"></i> KMD</div>
     <nav id="navbar">
-  <a href="index.html"><i data-lucide="home"></i> Accueil</a>
-  <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
-  <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
-  <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
-  <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
-  <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
-      <a href="politique.html" class="active"cl><i data-lucide="shield"></i> Politique</a>
-  <a href="profil.html"><i data-lucide="user"></i> Profil</a>
-<a href="recuperation.html">Mot de passe oublié ?</a><!-- AJOUT -->
-</nav>
+      <a href="index.html"><i data-lucide="home"></i> Accueil</a>
+      <a href="galerie.html"><i data-lucide="image"></i> Galerie</a>
+      <a href="premium.html"><i data-lucide="crown"></i> Premium</a>
+      <a href="contribuer.html"><i data-lucide="upload"></i> Contribuer</a>
+      <a href="contact.html"><i data-lucide="mail"></i> Nous joindre</a>
+      <a href="conditions.html"><i data-lucide="file-text"></i> Conditions</a>
+      <a href="politique.html" class="active"><i data-lucide="shield"></i> Politique</a>
+      <a href="profil.html"><i data-lucide="user"></i> Profil</a>
+      <a href="recuperation.html">Mot de passe oublié?</a>
+    </nav>
     <div style="display:flex; gap:10px; align-items:center;">
-      <div id="userMenu"></div> <!-- BOUTON CONNEXION AJOUTE -->
+      <div id="userMenu"></div>
       <button id="theme-toggle"><i data-lucide="moon"></i></button>
       <button class="menu-btn" id="menu-btn"><i data-lucide="menu"></i></button>
     </div>
   </header>
 
   <section>
-    <!-- LANGUE FRANÇAIS -->
+    <!-- FRANÇAIS -->
     <h1><i data-lucide="shield"></i> Politique de Confidentialité</h1>
     <p><strong>Dernière mise à jour :</strong> 27 Juillet 2026</p>
-    <p>Chez <strong>KMD WALLPAPER</strong>, nous respectons votre vie privée. Cette politique explique quelles données nous collectons et comment nous les protégeons, conformément au RGPD, à la Loi 25 du Québec et au CCPA.</p>
+    <p>Chez <strong>KMD WALLPAPER</strong>, nous respectons votre vie privée. Cette politique explique quelles données nous collectons, pourquoi, et comment nous les protégeons, conformément au <strong>RGPD</strong>, à la <strong>Loi 25 du Québec</strong> et au <strong>CCPA</strong>.</p>
 
     <h3>1. Données que nous collectons</h3>
     <ul>
       <li><b>Données fournies :</b> Nom, Email via le formulaire de contact et l'inscription.</li>
-      <li><b>Données de paiement :</b> Traitées uniquement par Stripe. Nous ne voyons jamais votre carte.</li>
-      <li><b>Données techniques :</b> Cookies pour le mode sombre et Google Analytics anonymes.</li>
+      <li><b>Données de paiement :</b> Traitées uniquement par Stripe. Nous ne voyons jamais et ne stockons jamais votre carte.</li>
+      <li><b>Données techniques :</b> Cookies essentiels pour le mode sombre et les préférences. Google Analytics avec IP anonymisée pour mesurer l’audience.</li>
+      <li><b>Données de navigation :</b> Pages visitées, type d’appareil, navigateur.</li>
     </ul>
 
     <h3>2. Comment nous utilisons vos données</h3>
-    <p>Vos données servent uniquement à : vous envoyer vos wallpapers, gérer votre abonnement Premium, répondre à vos messages, et améliorer le site.</p>
+    <p>Vos données servent uniquement à : vous envoyer vos wallpapers, gérer votre abonnement Premium, répondre à vos messages, améliorer le site, et respecter nos obligations légales. Nous <b>ne vendons jamais</b> vos données à des tiers.</p>
 
-    <h3>3. Vos droits</h3>
-    <p>Vous avez le droit d'accéder, corriger ou supprimer vos données. Contactez-nous : <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></p>
-    <p>Pour les résidents de l'UE : Droit à l'oubli RGPD. Pour le Québec : Loi 25. Pour la Californie : Droit de ne pas vendre vos données.</p>
+    <h3>3. Cookies et consentement</h3>
+    <p>Nous utilisons des cookies essentiels au fonctionnement. Pour les cookies d’analyse, nous demandons votre consentement. Vous pouvez les refuser à tout moment.</p>
 
-    <h3>4. Sécurité</h3>
-    <p>Nous utilisons le chiffrement HTTPS et ne vendons jamais vos données à des tiers.</p>
+    <h3>4. Durée de conservation</h3>
+    <p>Vos données sont conservées pendant <b>24 mois après la suppression de votre compte</b> ou votre dernière activité. Les données de facturation sont conservées 7 ans pour des raisons fiscales.</p>
 
-    <h3>5. Contact</h3>
-    <p><b>KMD WALLPAPER</b><br>Lévis, Québec, Canada<br>Email: supportkmdwallpaper@gmail.com</p>
+    <h3>5. Lieu de stockage et transfert</h3>
+    <p>Vos données sont hébergées au <b>Canada</b>. Si elles sont transférées hors du Québec, c’est uniquement vers des partenaires offrant un niveau de protection équivalent, comme Stripe et Google.</p>
+
+    <h3>6. Vos droits</h3>
+    <p>Vous avez le droit d’accéder, rectifier, supprimer, porter et retirer votre consentement pour vos données.</p>
+    <p><b>UE :</b> Droit à l’oubli RGPD. <b>Québec :</b> Droits Loi 25. <b>Californie :</b> Droit de ne pas vendre vos données CCPA.</p>
+    <p>Pour exercer vos droits : <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a>. Nous répondons dans les 30 jours.</p>
+
+    <h3>7. Sécurité</h3>
+    <p>Nous utilisons le chiffrement <b>HTTPS</b> et des mesures techniques pour protéger vos données.</p>
+
+    <h3>8. Âge minimum</h3>
+    <p>Ce site n’est pas destiné aux personnes de <b>moins de 14 ans</b>. Nous ne collectons pas sciemment de données d’enfants.</p>
+
+    <h3>9. Contact</h3>
+    <p><b>KMD WALLPAPER</b><br>Responsable de la protection des renseignements personnels<br>Lévis, Québec, Canada<br>Email: <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></p>
 
     <hr>
 
-    <!-- LANGUE ANGLAIS -->
+    <!-- ANGLAIS -->
     <h1>Privacy Policy</h1>
     <p><strong>Last updated:</strong> July 27, 2026</p>
-    <p>At <strong>KMD WALLPAPER</strong>, we respect your privacy. This policy explains what data we collect and how we protect it, in compliance with GDPR, Quebec Law 25, and CCPA.</p>
+    <p>At <strong>KMD WALLPAPER</strong>, we respect your privacy. This policy explains what data we collect, why, and how we protect it, in compliance with <strong>GDPR</strong>, <strong>Quebec Law 25</strong>, and <strong>CCPA</strong>.</p>
 
     <h3>1. Data We Collect</h3>
     <ul>
       <li><b>Data you provide:</b> Name, Email via the contact form and signup.</li>
-      <li><b>Payment Data:</b> Processed only by Stripe. We never see your card.</li>
-      <li><b>Technical Data:</b> Cookies for dark mode and anonymous Google Analytics.</li>
+      <li><b>Payment Data:</b> Processed only by Stripe. We never see or store your card.</li>
+      <li><b>Technical Data:</b> Essential cookies for dark mode. Google Analytics with anonymized IP.</li>
+      <li><b>Navigation Data:</b> Pages visited, device type, browser.</li>
     </ul>
 
     <h3>2. How We Use Your Data</h3>
-    <p>Your data is used only to: send you wallpapers, manage your Premium subscription, reply to your messages, and improve the website.</p>
+    <p>Your data is used only to: send you wallpapers, manage your Premium subscription, reply to your messages, improve the website, and comply with legal obligations. We <b>never sell</b> your data to third parties.</p>
 
-    <h3>3. Your Rights</h3>
-    <p>You have the right to access, correct, or delete your data. Contact us: <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></p>
-    <p>For EU residents: GDPR Right to Erasure. For Quebec: Law 25. For California: Right to Opt-Out of Sale.</p>
+    <h3>3. Cookies and Consent</h3>
+    <p>We use essential cookies. For analytics cookies, we ask for your consent. You can refuse them at any time.</p>
 
-    <h3>4. Security</h3>
-    <p>We use HTTPS encryption and we never sell your data to third parties.</p>
+    <h3>4. Data Retention</h3>
+    <p>Your data is kept for <b>24 months after account deletion</b> or last activity. Billing data is kept for 7 years for tax purposes.</p>
 
-    <h3>5. Contact</h3>
-    <p><b>KMD WALLPAPER</b><br>Lévis, Quebec, Canada<br>Email: supportkmdwallpaper@gmail.com</p>
+    <h3>5. Data Storage and Transfer</h3>
+    <p>Your data is hosted in <b>Canada</b>. If transferred outside Quebec, it is only to partners with equivalent protection, like Stripe and Google.</p>
+
+    <h3>6. Your Rights</h3>
+    <p>You have the right to access, correct, delete, port, and withdraw consent for your data.</p>
+    <p><b>EU:</b> GDPR Right to Erasure. <b>Quebec:</b> Law 25 Rights. <b>California:</b> CCPA Right to Opt-Out.</p>
+    <p>To exercise your rights: <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a>. We respond within 30 days.</p>
+
+    <h3>7. Security</h3>
+    <p>We use <b>HTTPS</b> encryption and technical measures to protect your data.</p>
+
+    <h3>8. Minimum Age</h3>
+    <p>This site is not intended for individuals <b>under 14</b>. We do not knowingly collect data from children.</p>
+
+    <h3>9. Contact</h3>
+    <p><b>KMD WALLPAPER</b><br>Privacy Officer<br>Lévis, Quebec, Canada<br>Email: <a href="mailto:supportkmdwallpaper@gmail.com">supportkmdwallpaper@gmail.com</a></p>
   </section>
 
   <!-- POPUP CONNEXION -->
@@ -170,6 +196,15 @@
         <button type="submit" id="submitBtn" style="width:100%; background:#2563eb; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">Se connecter</button>
       </form>
       <p id="authError" style="color:red; text-align:center; margin-top:10px; display:none;"></p>
+    </div>
+  </div>
+
+  <!-- BANNIERE COOKIES -->
+  <div id="cookie-banner">
+    <p>🍪 Nous utilisons des cookies pour le mode sombre et l’analyse anonyme du site. En cliquant "Accepter", vous consentez à l’utilisation des cookies conformément à notre <a href="politique.html" style="color:#60a5fa;">Politique</a>.</p>
+    <div>
+      <button onclick="acceptCookies()">Accepter</button>
+      <button class="reject" onclick="rejectCookies()">Refuser</button>
     </div>
   </div>
 
@@ -214,13 +249,29 @@
         lucide.createIcons();
       });
 
-      /* ===== GESTION USER ===== */
+      /* BANNIERE COOKIES LOI 25 */
+      function showCookieBanner() {
+        if(!localStorage.getItem('kmd_cookie_consent')) {
+          document.getElementById('cookie-banner').style.display = 'flex';
+        }
+      }
+      window.acceptCookies = function() {
+        localStorage.setItem('kmd_cookie_consent', 'accepted');
+        document.getElementById('cookie-banner').style.display = 'none';
+      }
+      window.rejectCookies = function() {
+        localStorage.setItem('kmd_cookie_consent', 'rejected');
+        document.getElementById('cookie-banner').style.display = 'none';
+        // Ici tu peux désactiver Google Analytics si tu l’ajoutes
+      }
+      showCookieBanner();
+
+      /* GESTION USER */
       function getUserData(){
         let users = JSON.parse(localStorage.getItem('kmd_users_data') || '{}');
         let email = localStorage.getItem('kmd_user');
         return {email: email, data: users[email] || {premium: false}};
       }
-
       function updateUserMenu() {
         const {email} = getUserData();
         const userMenu = document.getElementById('userMenu');
@@ -234,7 +285,7 @@
       window.logout = function() { localStorage.removeItem('kmd_user'); location.reload(); }
       updateUserMenu();
 
-      /* ===== JS POPUP CONNEXION ===== */
+      /* JS POPUP CONNEXION */
       window.openAuth = function(mode = 'login') { document.getElementById('authModal').style.display = 'block'; switchTab(mode); lucide.createIcons(); }
       window.closeAuth = function() { document.getElementById('authModal').style.display = 'none'; document.getElementById('authError').style.display = 'none'; }
       window.switchTab = function(mode) {
